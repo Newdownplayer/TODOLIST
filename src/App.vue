@@ -2,15 +2,19 @@
   <div>
     <h1>TodoList</h1>
     <form @submit.prevent="addTodo">
-      <input type="text" v-model="newTodo" placeholder="Add New Todo">
+      <input type="text" v-model="newTodo" placeholder="Add New Todo" class="input">
       <button>Add Todo</button>
     </form>
     <ul>
       <li v-for="(todo, index) in todos" :key="index">
-        <input type="checkbox" v-model="todo.completed">
-        <span :class="{ completed: todo.completed }">{{ todo.text }}</span>
-        <span v-if="todo.created" class="created-time">{{ todo.created.toLocaleString() }}</span>
-        <button @click="removeTodo(index)">Delete</button>
+        <div class="list">
+          <div>
+            <input type="checkbox" v-model="todo.completed">
+            <span :class="{ completed: todo.completed }">{{ todo.text }}</span>
+          </div>
+          <span v-if="todo.created" class="created-time">{{ todo.created.toLocaleString() }}</span>
+          <button @click="removeTodo(index)">Delete</button>
+        </div>
       </li>
     </ul>
   </div>
@@ -65,7 +69,38 @@ export default {
   color: gray;
 }
 
+li {
+  list-style: none;
+}
+
+li button {
+  color: rgb(201, 147, 147);
+  background-color: white;
+  border: 1px solid rgb(163, 116, 116);
+  border-radius: 4px;
+}
+
+
 h1 {
   text-align: center;
+  margin: 32px;
+}
+
+
+form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.input {
+  margin-right: 10px;
+}
+
+.list {
+  margin: 12px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
